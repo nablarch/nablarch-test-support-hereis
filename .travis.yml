@@ -1,0 +1,23 @@
+language: java
+branches:
+  only:
+  - master
+  - develop
+before_install:
+- chmod +x gradlew
+install: true
+cache:
+  directories:
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+script:
+- git clone -b master https://github.com/nablarch/nablarch-ci-script.git $HOME/build-script/
+  && chmod +x $HOME/build-script/travis-ci/*.sh
+- $HOME/build-script/travis-ci/install-oracle-jdk6.sh
+- $HOME/build-script/travis-ci/nablarch-build.sh
+- $HOME/build-script/travis-ci/upload-test-report.sh
+before_cache:
+- rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+notifications:
+  slack:
+    secure: T+z543XNug/7vQMQNJWnzBjJVQnwziaEyD+2KCkUUvuFhoZM2puzyMqCBSVLEk7tkIPbCFHWro05TDP8IIjdMWbi73wfp5Hp3wWcHx9FjDoM21Vg5YyeawVSb9ZZNsb08eMXzMDiShHi3M9OYnwdjIjk1bKb7nqkAtVU3wVHrKBEcRbcPqfjJUZh1HU4lKeRDCgHtVPHQtEiETa8D59vr9v84BnsZevHaqAXtzIOYoOGAGKBtvvnJN8kt9H9CO1HdFbPSHvgEoV0D8lR2tpLF0mldISgXe676uMeygfvI3nyz610m3WyVdX+HDSkkQvU1uYlantaZd7A0lXj5ApOMM22IJuDQoS0d+jlG2AjwTMIKNoXMHEjSH3xdp16oK8CHgENHHgIWU/mpr5gZE32Pca/jDkebTNlAY/XOee58PRnNzPzN9ZHxZQm36U2nlZm7NvM2DmAti4c9TRCPcTYtTDib+IJJP4mkFmUSG20yoeol3q0+0pX9Hv63irLQ1/sT93d/JgS4wyzCCwi+OgCU5vsyjNvG6S6c8hf1UMedDnKZSNBUwcn9FEqtFX2ShIBhcgP3XeoBbShJu6u6wrhFw7V7rKopC442O0t8eKzNpnWh94GcqTQain2TDe+YbsOjg0Vor2P6D/Qh2rokBP/hFlMjIq48QnZkYZSrKjclOg=
