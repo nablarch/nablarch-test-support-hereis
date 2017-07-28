@@ -31,7 +31,6 @@ dependencies {
 
 test {
 
-  ignoreFailures = true
 
   beforeTest { descriptor ->
     logger.lifecycle("Running test: " + descriptor)
