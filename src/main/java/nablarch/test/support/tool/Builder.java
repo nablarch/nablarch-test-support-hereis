@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  * List・Map・String 等の基本型からなるオブジェクトグラフの生成を簡略化する
  * ユーティリティメソッドを提供する。
  *
- * @author Iwauo Tajima <iwauo@tis.co.jp>
+ * @author Iwauo Tajima
  */
 public final class Builder {
 
@@ -214,11 +214,12 @@ public final class Builder {
      *       条件を満たすメソッドが存在しない場合、実行時例外を送出する。
      *       a. スタティックメソッド elementType.valueOf("引数の要素の型")
      *       b. コンストラクタ elementType("引数の要素の型")
-     *    使用例::
+     *    使用例::{@code
      *        List<java.sql.Date> leapDays = Builder.listf(java.sql.Date.class
      *        , java.sql.Date.valueOf("2004-02-29") // elementTypeのオブジェクトを設定。
      *        , "2008-02-29"                        // java.sql.Date.valueOf(String) の結果が格納される。
      *        );
+     *    }
      * </pre>
      *
      * @param <T> 生成されるListの要素型
@@ -234,13 +235,14 @@ public final class Builder {
     /**
      * {@link #list(Class, Object...)} をprintf型の埋め込みパラメータが使用できるように拡張したもの。
      * <pre>
-     *    使用例::
+     *    使用例::{@code
      *      String leapDate = "02-29";
      *      List<java.sql.Date> leapDays = Builder.listf(java.sql.Date.class
      *      , java.sql.Date.valueOf("2004-02-29") // elementTypeのオブジェクトを設定。
      *      , "2008-02-29"                        // java.sql.Date.valueOf(String) の結果が格納される。
      *      , "2012-%s", leapDate                 // 埋め込みパラメータを使用。
      *      );
+     *    }
      * </pre>
      *
      * @param <T> 生成されるListの要素型
@@ -281,7 +283,7 @@ public final class Builder {
     /**
      * テーブル表記の文字列からテーブルカラムをキーに持つMapを要素とするListを生成する。
      * <pre>
-     * 使用例::
+     * 使用例::{@code
      *    List<Map<String, Object>> recordSet = Builder.table(
      *      " id first_name last_name  age gender comment                    "
      *    , " -- ---------- ---------  --- ------ ----------------------     "
@@ -289,10 +291,11 @@ public final class Builder {
      *    , " 2  fugao      fugayama   61  M      ''                         "
      *    , " 3  piyomi     piyokawa   35  F      'hogeo hogeta''s daughter.'"
      *    );
+     *    }
      * </pre>
      *
      * @param rows テーブルの各行もしくはカラム定義を表す文字列
-     * @return テーブルオブジェクト(List<Map>)
+     * @return テーブルオブジェクト（{@code List<Map>}）
      */
     public static List<Map<String, Object>> table(String... rows) {
         return new Table(lines((Object[]) rows)).rows();
