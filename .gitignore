@@ -4,6 +4,7 @@ build/
 .classpath
 .project
 .gradle/
+.idea
 
 ### Maven template
 target/
